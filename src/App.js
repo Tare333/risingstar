@@ -40,8 +40,6 @@ const DailyValue = ({date, value, prev, currencySymbol}) => {
 }
 
 const Content = () => {
-  //const [startDate, setStartDate] = useState(new Date(2021, 5, 1));
-  //const [endDate, setEndDate] = useState(new Date(2021, 7, 1, 1));
   const [startDate, setStartDate] = useState(new Date(Date.now() - 7 * 24 * 3600 * 1000));
   const [endDate, setEndDate] = useState(new Date());
 
@@ -52,7 +50,7 @@ const Content = () => {
   const [priceData, setPriceData] = useState([]);
   const [bearishTrend, setBearishTrend] = useState(0);
   const [maxTradeVol, setMaxTradeVol] = useState([0, 0]);
-  const [maxProfit, setMaxProfit] = useState([0, [0,0]]);
+  const [maxProfit, setMaxProfit] = useState([0, [0, 0]]);
 
   useEffect(() => {
     if (Object.keys(dataJson).length > 0) {
@@ -193,13 +191,15 @@ const Content = () => {
 
       <br/>
 
-      {Object.keys(dataJson).length > 0 && <div>
-      <div>Longest bearish trend: {bearishTrend} days</div>
-      <div>Maximum trading volume {maxTradeVol[1].toLocaleString(LOCALE, {maximumFractionDigits: DECIMALS})} {currency_symbols[currency]} occured on date {maxTradeVol[0]}</div>
-      {maxProfit[0] > 0 ?
-      <div>Maximum profit of {maxProfit[0].toLocaleString(LOCALE, {maximumFractionDigits: DECIMALS})} {currency_symbols[currency]} per coin or {toPercentage(maxProfit[0], maxProfit[1][0][1])} obtainable by buying in {maxProfit[1][0][0]} and selling in {maxProfit[1][1][0]}</div>
-      : <div>No profits available on given date range</div>
-      }
+      {Object.keys(dataJson).length > 0 && 
+      <div>
+        <div>Longest bearish trend: {bearishTrend} days</div>
+        <div>Maximum trading volume {maxTradeVol[1].toLocaleString(LOCALE, {maximumFractionDigits: DECIMALS})} {currency_symbols[currency]} occured on date {maxTradeVol[0]}</div>
+        
+        {maxProfit[0] > 0 ?
+        <div>Maximum profit of {maxProfit[0].toLocaleString(LOCALE, {maximumFractionDigits: DECIMALS})} {currency_symbols[currency]} per coin or {toPercentage(maxProfit[0], maxProfit[1][0][1])} obtainable by buying in {maxProfit[1][0][0]} and selling in {maxProfit[1][1][0]}</div>
+        : <div>No profits available on given date range</div>
+        }
       </div>
       }
 
